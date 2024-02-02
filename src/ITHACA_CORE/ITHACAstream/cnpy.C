@@ -644,7 +644,7 @@ void cnpy::save(const Eigen::SparseMatrix<T>& mat, const std::string fname)
     std::vector<size_t> shape1 = std::vector<size_t> {(unsigned long) (mat.nonZeros())};
     std::vector<size_t> shape2 = std::vector<size_t> {(unsigned long) (mat.outerSize() + 1)};
     std::vector<size_t> shape3 = std::vector<size_t> {2};
-    std::vector<size_t> shape4 = std::vector<size_t> {256};
+    std::vector<size_t> shape4 = std::vector<size_t> {1};
     cnpy::npz_save(fname, "data", mat.valuePtr(), shape1, "w");
     cnpy::npz_save(fname, "indices", mat.innerIndexPtr(), shape1, "a");
     cnpy::npz_save(fname, "indptr", mat.outerIndexPtr(), shape2, "a");
@@ -654,7 +654,7 @@ void cnpy::save(const Eigen::SparseMatrix<T>& mat, const std::string fname)
     shape[0] = mat.rows();
     shape[1] = mat.cols();
     cnpy::npz_save(fname, "shape", shape, shape3, "a");
-    char myVar2 = 'abc';
+    char myVar2 = 'csc';
     cnpy::npz_save(fname, "format", &myVar2, shape4, "a");
 }
 
