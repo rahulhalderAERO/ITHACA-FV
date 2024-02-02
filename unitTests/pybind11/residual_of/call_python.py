@@ -11,6 +11,15 @@ S = a.getS()
 S [0,0] = 1
 # solve the problem using OF
 a.solve()
+
+# Get the residual
+
+res = a.getResidual(T,S)
+
+# print the residual
+
+print("res ==", res)
+
 # store the temperature field to folder 1
 a.exportT(".","1","T")
 # Set the first element of the source term to 1
