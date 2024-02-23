@@ -78,6 +78,13 @@ public:
         return std::move(Teig);
     }
 
+    Eigen::MatrixXd getX()
+    {
+        volVectorField X(_S().mesh().C());
+        Eigen::MatrixXd X_eig(Foam2Eigen::field2Eigen(X));
+        return std::move(X_eig);
+    }
+
     Eigen::Map<Eigen::MatrixXd> get_residual(Eigen::VectorXd& T, Eigen::VectorXd& S)
     {
         Foam2Eigen::Eigen2field(_T(), T);
@@ -168,5 +175,6 @@ PYBIND11_MODULE(of_pybind11_system, m)
         .def("get_rhs", &of_pybind11_system::get_rhs)
         .def("get_system_matrix", &of_pybind11_system::get_system_matrix)
         .def("solve", &of_pybind11_system::solve)
-        .def("exportT", &of_pybind11_system::exportT);
+        .def("exportT", &of_pybind11_system::exportT)
+        .def("getX", &of_pybind11_system::getX, py::return_value_policy::reference_internal);
 }
