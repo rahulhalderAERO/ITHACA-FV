@@ -90,12 +90,20 @@ class Burgers: public reductionProblem, public UnsteadyProblem
         /// Flux
         autoPtr<surfaceScalarField> _phi;
 
+        /// Source Term
+        autoPtr<volVectorField> _S;
+
+        /// Source Term
+        autoPtr<volVectorField> _res;
+
         /// Initial Flux (for restart purposes)
         autoPtr<surfaceScalarField> _phi0;
 
         autoPtr<IOdictionary> _transportProperties;
 
         autoPtr<dimensionedScalar> _nu;
+
+        autoPtr<dimensionedScalar> _Ro;
 
         /// fvOptions
         autoPtr<fv::options> _fvOptions;
