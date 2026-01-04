@@ -89,6 +89,7 @@ void Burgers::truthSolve(word folder)
     surfaceScalarField& phi = _phi();
     fv::options& fvOptions = _fvOptions();
     simpleControl& simple = _simple();
+    //volScalarField& nu = _nu();
     dimensionedScalar& nu = _nu();
     counter = 1;
     ITHACAstream::exportSolution(U, name(counter), folder + name(folderN));
@@ -135,6 +136,11 @@ void Burgers::restart()
     Time& runTime = _runTime();
     runTime.setTime(0, 1);
     Foam::fvMesh& mesh = _mesh();
+
+
 #include "createFields.H"
 #include "createFvOptions.H"
 }
+
+
+

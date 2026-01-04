@@ -48,6 +48,25 @@ _U0 = autoPtr<volVectorField>
           new volVectorField(U0)
       );
 
+
+_S = autoPtr<volVectorField>
+     (
+         new volVectorField
+         (
+             IOobject
+             (
+                 "S",
+                 runTime.timeName(),
+                 mesh,
+                 IOobject::NO_READ,
+                 IOobject::AUTO_WRITE
+             ),
+             U.mesh(),
+             dimensionedVector("zero", dimensionSet(0, 1, -2, 0, 0, 0, 0), vector(0,0,0))
+         )
+     );
+
+
 Info << "Reading/calculating face flux field phi\n" << endl;
 
 _phi = autoPtr<surfaceScalarField>
@@ -72,6 +91,28 @@ _phi0 = autoPtr<surfaceScalarField>
         (
             new surfaceScalarField(phi0)
         );
+
+
+
+
+_res = autoPtr<volVectorField>
+     (
+         new volVectorField
+         (
+             IOobject
+             (
+                 "res",
+                 runTime.timeName(),
+                 mesh,
+                 IOobject::NO_READ,
+                 IOobject::AUTO_WRITE
+             ),
+             U.mesh(),
+             dimensionedVector("zero", dimensionSet(0, 1, -2, 0, 0, 0, 0), vector::zero)
+         )
+     );
+
+
 
 Info << "Reading transportProperties\n" << endl;
 
@@ -99,3 +140,27 @@ _nu = autoPtr<dimensionedScalar>
               _transportProperties().lookup("nu")
           )
       );
+
+
+/*_nu = autoPtr<volScalarField>
+      (
+          new volScalarField
+          (
+              IOobject
+              (
+                  "nu",
+                  runTime.timeName(),
+                  mesh,
+                  IOobject::NO_READ,
+                  IOobject::AUTO_WRITE
+              ),
+              U.mesh(),
+              dimensionedScalar("zero", dimensionSet(0, 2, -1, 0, 0, 0, 0), 0.1)
+          )
+      );
+*/
+
+
+
+
+
